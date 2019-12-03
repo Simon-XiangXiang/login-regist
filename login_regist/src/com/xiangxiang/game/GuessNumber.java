@@ -38,7 +38,7 @@ public class GuessNumber {
 				System.out.println("猜的数小了");
 			}
 		}
-		
-		sc.close();
+		//sc.close()会把System.in也关掉,如果非要用System.in,那么在没有全部读取完之前不要关闭Scanner.
+		//sc.close();
 	}
 }

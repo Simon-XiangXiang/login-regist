@@ -7,9 +7,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import com.xiangxiang.dao.UserDao;
 import com.xiangxiang.pojo.User;
@@ -40,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader("user.txt"));
+			br = new BufferedReader(new FileReader(file));
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				String[] datas = line.split("=");
@@ -76,7 +77,8 @@ public class UserDaoImpl implements UserDao {
 		 */
 		BufferedWriter bw = null;
 		try {
-			bw = new BufferedWriter(new FileWriter("user.txt"));
+			//要这样写才能追加文本而不是每次覆盖重写
+			bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
 			bw.append(user.getUsername() + "=" + user.getPassword().hashCode());
 			bw.newLine();
 			bw.flush();

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.xiangxiang.dao.UserDao;
 import com.xiangxiang.dao.impl.UserDaoImpl;
 import com.xiangxiang.game.GuessNumber;
+import com.xiangxiang.game.Poker;
 import com.xiangxiang.pojo.User;
 
 /**
@@ -16,8 +17,7 @@ import com.xiangxiang.pojo.User;
 public class UserTest {
 
 	public static void main(String[] args) {
-		outer:
-		while (true) {
+		outer: while (true) {
 
 			// 欢迎界面
 			System.out.println("---------------翔翔的小程序---------------");
@@ -42,7 +42,7 @@ public class UserTest {
 
 				// 调用登录功能
 				boolean falg = ud.login(username, password);
-				
+
 				if (falg) {
 					System.out.println("登陆成功");
 					break outer;
@@ -58,11 +58,11 @@ public class UserTest {
 				String newUsername = sc.nextLine();
 				System.out.println("请输入密码:");
 				String newPassword = sc.nextLine();
-				
+
 				// 把用户名和密码封装到对象中
 				User user = new User(newUsername, newPassword);
-				
-				//调用注册功能
+
+				// 调用注册功能
 				ud.regist(user);
 				System.out.println("注册成功");
 
@@ -76,8 +76,39 @@ public class UserTest {
 				break;
 			}
 		}
-		System.out.println("来玩个小游戏吧!");
-		GuessNumber.start();
+
+		while (true) {
+			System.out.println("---------------翔翔的小游戏---------------");
+			System.out.println("1 猜数字");
+			System.out.println("2 斗地主");
+			System.out.println("3 退出");
+			System.out.println("请输入你的选择:");
+			Scanner sc = new Scanner(System.in);
+			String chioce = sc.nextLine();
+			if (chioce.equals("1")) {
+				GuessNumber.start();
+				System.out.println("还玩吗? y/n");
+				String chioce1 = sc.nextLine();
+				if (chioce1.equals("n")) {
+					break;
+				}
+			} else if (chioce.equals("2")) {
+				Poker.start();
+				System.out.println("还玩吗? y/n");
+				String chioce1 = sc.nextLine();
+				if (chioce1.equals("n")) {
+					break;
+				}
+			} else if (chioce.equals("3")) {
+				break;
+			} else {
+				System.out.println("不可以输入奇怪的内容哦");
+			}
+
+		}
+
+		System.out.println("翔翔会想你的~");
+
 	}
 
 }
